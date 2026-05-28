@@ -3,8 +3,8 @@ short_desc: "将 LLM 回复翻译成任意语言，支持 GPT-SoVITS / Edge TTS 
 name: astrbot_plugin_translate_tts
 desc: "拦截 LLM 的回复文本，调用默认对话模型翻译成目标语言，再通过多种 TTS 引擎合成语音。支持 GPT-SoVITS、Edge TTS（免费）、OpenAI TTS、Fish Audio，可自定义翻译提示词。"
 version: 1.1.0
-author: "JxjxK"
-repo: "https://github.com/JxjxK/astrbot_plugin_translate_tts"
+author: "miku05231"
+repo: "https://github.com/miku05231/astrbot_plugin_translate_tts"
 support_platforms:
   - aiocqhttp
 astrbot_version: ">=4.0,<5"

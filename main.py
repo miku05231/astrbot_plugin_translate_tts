@@ -104,8 +104,8 @@ class Main(Star):
             system_prompt = self.custom_translation_prompt
         else:
             system_prompt = (
-                f"你是一个翻译器。将用户发送的文本翻译成{self.target_lang_name}。"
-                f"只输出{self.target_lang_name}翻译结果，不要输出任何其他内容。"
+                f"请将以下文本翻译成{self.target_lang_name}。"
+                f"只输出{self.target_lang_name}翻译结果，不要输出任何其他内容，不要解释，不要保留原文。"
                 "翻译要自然流畅，适合语音对话场景。"
             )
         try:
