@@ -1,0 +1,125 @@
+{
+    "tts_provider": {
+        "description": "TTS 提供商",
+        "hint": "选择语音合成服务提供商",
+        "type": "string",
+        "default": "gpt_sovits",
+        "options": ["gpt_sovits", "edge_tts", "openai_tts", "fish_audio"]
+    },
+    "gsv_api_url": {
+        "description": "GPT-SoVITS API 地址",
+        "hint": "GPT-SoVITS 服务的 API 地址，默认为 http://host.docker.internal:9880",
+        "type": "string",
+        "default": "http://host.docker.internal:9880"
+    },
+    "ref_audio_path": {
+        "description": "参考音频路径",
+        "hint": "GPT-SoVITS 参考音频文件路径，时长需在 3~10 秒之间",
+        "type": "string",
+        "default": ""
+    },
+    "prompt_text": {
+        "description": "参考音频对应文本",
+        "hint": "GPT-SoVITS 参考音频中对应的原文文本",
+        "type": "string",
+        "default": ""
+    },
+    "prompt_lang": {
+        "description": "参考音频语言",
+        "hint": "参考音频使用的语言代码，如 ja、en、zh 等",
+        "type": "string",
+        "default": "ja"
+    },
+    "edge_tts_voice": {
+        "description": "Edge TTS 语音",
+        "hint": "Edge TTS 使用的语音名称，如 ja-JP-NanamiNeural、en-US-JennyNeural",
+        "type": "string",
+        "default": "ja-JP-NanamiNeural"
+    },
+    "openai_api_key": {
+        "description": "OpenAI API Key",
+        "hint": "OpenAI TTS 服务的 API Key",
+        "type": "string",
+        "default": ""
+    },
+    "openai_api_base": {
+        "description": "OpenAI API 地址",
+        "hint": "OpenAI API 地址，默认为 https://api.openai.com/v1",
+        "type": "string",
+        "default": "https://api.openai.com/v1"
+    },
+    "openai_tts_model": {
+        "description": "OpenAI TTS 模型",
+        "hint": "OpenAI TTS 使用的模型，可选 tts-1 或 tts-1-hd",
+        "type": "string",
+        "default": "tts-1",
+        "options": ["tts-1", "tts-1-hd"]
+    },
+    "openai_tts_voice": {
+        "description": "OpenAI TTS 语音",
+        "hint": "OpenAI TTS 使用的语音，可选 alloy/echo/fable/onyx/nova/shimmer",
+        "type": "string",
+        "default": "alloy",
+        "options": ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+    },
+    "fish_api_url": {
+        "description": "Fish Audio API 地址",
+        "hint": "Fish Audio 服务的 API 地址",
+        "type": "string",
+        "default": "https://api.fish.audio"
+    },
+    "fish_api_key": {
+        "description": "Fish Audio API Key",
+        "hint": "Fish Audio 服务的 API Key",
+        "type": "string",
+        "default": ""
+    },
+    "fish_model_id": {
+        "description": "Fish Audio 模型 ID",
+        "hint": "Fish Audio 语音模型的 ID",
+        "type": "string",
+        "default": ""
+    },
+    "target_lang": {
+        "description": "目标语言代码",
+        "hint": "翻译和语音合成的目标语言代码，如 ja（日语）、en（英语）、ko（韩语）等",
+        "type": "string",
+        "default": "ja"
+    },
+    "target_lang_name": {
+        "description": "目标语言名称",
+        "hint": "目标语言的中文名称，用于翻译提示词，如 日语、英语、韩语",
+        "type": "string",
+        "default": "日语"
+    },
+    "output_mode": {
+        "description": "输出模式",
+        "hint": "dual_output 同时输出文本和语音，voice_only 仅输出语音",
+        "type": "string",
+        "default": "dual_output",
+        "options": ["dual_output", "voice_only"]
+    },
+    "text_length_limit": {
+        "description": "文本长度上限",
+        "hint": "超过此长度的文本将跳过翻译和语音合成",
+        "type": "int",
+        "default": 200
+    },
+    "request_timeout": {
+        "description": "API 请求超时（秒）",
+        "type": "int",
+        "default": 60
+    },
+    "save_dir": {
+        "description": "语音文件保存目录",
+        "hint": "生成的语音文件将保存到此目录",
+        "type": "string",
+        "default": ""
+    },
+    "custom_translation_prompt": {
+        "description": "自定义翻译提示词",
+        "hint": "留空则使用默认翻译提示词，填写后将使用自定义提示词进行翻译",
+        "type": "string",
+        "default": ""
+    }
+}
