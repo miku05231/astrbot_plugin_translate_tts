@@ -31,7 +31,7 @@
 
 ```bash
 cd /path/to/AstrBot/plugins
-git clone https://github.com/miku05231/astrbot_plugin_translate_tts.git
+git clone https://github.com/JxjxK/astrbot_plugin_translate_tts.git
 ```
 
 ### 安装 Edge TTS（可选）
@@ -100,6 +100,20 @@ OpenAI TTS 语音选项：`alloy`、`echo`、`fable`、`onyx`、`nova`、`shimme
 | `fish_api_url` | Fish Audio API 地址 | `https://api.fish.audio` |
 | `fish_api_key` | Fish Audio API Key | - |
 | `fish_model_id` | 语音模型 ID | - |
+
+#### Azure TTS
+
+| 配置项 | 说明 | 默认值 |
+|--------|------|--------|
+| `azure_subscription_key` | Azure 订阅密钥 | - |
+| `azure_region` | Azure 区域 | `eastasia` |
+| `azure_voice_name` | Azure 语音名称 | `ja-JP-NanamiNeural` |
+
+常用 Azure 区域：
+- `eastasia` - 东亚
+- `japaneast` - 日本东部
+- `westus` - 美国西部
+- `westeurope` - 西欧
 
 ### 语言代码参考
 
@@ -201,6 +215,18 @@ tts_provider: "fish_audio"
 fish_api_url: "https://api.fish.audio"
 fish_api_key: "your-fish-api-key"
 fish_model_id: "your-model-id"
+target_lang: "ja"
+target_lang_name: "日语"
+output_mode: "dual_output"
+```
+
+### Azure TTS
+
+```yaml
+tts_provider: "azure_tts"
+azure_subscription_key: "your-azure-subscription-key"
+azure_region: "eastasia"
+azure_voice_name: "ja-JP-NanamiNeural"
 target_lang: "ja"
 target_lang_name: "日语"
 output_mode: "dual_output"

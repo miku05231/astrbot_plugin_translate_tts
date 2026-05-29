@@ -4,7 +4,7 @@
         "hint": "选择语音合成服务提供商",
         "type": "string",
         "default": "gpt_sovits",
-        "options": ["gpt_sovits", "edge_tts", "openai_tts", "fish_audio"]
+        "options": ["gpt_sovits", "edge_tts", "openai_tts", "fish_audio", "azure_tts"]
     },
     "gsv_api_url": {
         "description": "GPT-SoVITS API 地址",
@@ -79,6 +79,24 @@
         "hint": "Fish Audio 语音模型的 ID",
         "type": "string",
         "default": ""
+    },
+    "azure_subscription_key": {
+        "description": "Azure 订阅密钥",
+        "hint": "Azure Speech 服务的订阅密钥",
+        "type": "string",
+        "default": ""
+    },
+    "azure_region": {
+        "description": "Azure 区域",
+        "hint": "Azure Speech 服务区域，如 eastasia、japaneast、westus",
+        "type": "string",
+        "default": "eastasia"
+    },
+    "azure_voice_name": {
+        "description": "Azure 语音名称",
+        "hint": "Azure TTS 使用的语音名称，如 ja-JP-NanamiNeural、en-US-JennyNeural",
+        "type": "string",
+        "default": "ja-JP-NanamiNeural"
     },
     "target_lang": {
         "description": "目标语言代码",

@@ -42,6 +42,11 @@ class Main(Star):
         # Edge TTS 配置
         self.edge_tts_voice: str = config.get("edge_tts_voice", "ja-JP-NanamiNeural")
 
+        # Azure TTS 配置
+        self.azure_subscription_key: str = config.get("azure_subscription_key", "")
+        self.azure_region: str = config.get("azure_region", "eastasia")
+        self.azure_voice_name: str = config.get("azure_voice_name", "ja-JP-NanamiNeural")
+
         # 目标语言配置
         self.target_lang: str = config.get("target_lang", "ja")
         self.target_lang_name: str = config.get("target_lang_name", "日语")
@@ -132,6 +137,7 @@ class Main(Star):
             "edge_tts": self._tts_edge_tts,
             "openai_tts": self._tts_openai,
             "fish_audio": self._tts_fish_audio,
+            "azure_tts": self._tts_azure,
         }
 
         provider_func = providers.get(self.tts_provider)
@@ -223,6 +229,29 @@ class Main(Star):
                 f"{self.fish_api_url}/v1/tts",
                 headers=headers,
                 json=body,
+            )
+            resp.raise_for_status()
+            return resp.content
+
+    async def _tts_azure(self, text: str) -> bytes | None:
+        """Azure TTS"""
+        if not self.azure_subscription_key:
+            logger.error("[翻译TTS] Azure 订阅密钥未配置")
+            return None
+
+        headers = {
+            "Ocp-Apim-Subscription-Key": self.azure_subscription_key,
+            "Content-Type": "application/ssml+xml",
+            "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
+        }
+        ssml = f"""<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{self.target_lang}'>
+            <voice name='{self.azure_voice_name}'>{text}</voice>
+        </speak>"""
+        async with httpx.AsyncClient(timeout=self.request_timeout) as client:
+            resp = await client.post(
+                f"https://{self.azure_region}.tts.speech.microsoft.com/cognitiveservices/v1",
+                headers=headers,
+                content=ssml,
             )
             resp.raise_for_status()
             return resp.content
