@@ -115,6 +115,15 @@ OpenAI TTS 语音选项：`alloy`、`echo`、`fable`、`onyx`、`nova`、`shimme
 - `westus` - 美国西部
 - `westeurope` - 西欧
 
+#### Qwen3-TTS（通义千问语音合成）
+
+| 配置项 | 说明 | 默认值 |
+|--------|------|--------|
+| `qwen_api_key` | DashScope API Key | - |
+| `qwen_voice_name` | 语音名称 | `Chelsie` |
+
+可选语音：`Chelsie`、`Ethan`、`Serena`、`Amber`、`Bella`、`Nicole`、`Jason`、`Grace`、`Skye`
+
 ### 语言代码参考
 
 | 语言 | 代码 | 名称 |
@@ -227,6 +236,17 @@ tts_provider: "azure_tts"
 azure_subscription_key: "your-azure-subscription-key"
 azure_region: "eastasia"
 azure_voice_name: "ja-JP-NanamiNeural"
+target_lang: "ja"
+target_lang_name: "日语"
+output_mode: "dual_output"
+```
+
+### Qwen3-TTS
+
+```yaml
+tts_provider: "qwen_tts"
+qwen_api_key: "your-dashscope-api-key"
+qwen_voice_name: "Chelsie"
 target_lang: "ja"
 target_lang_name: "日语"
 output_mode: "dual_output"

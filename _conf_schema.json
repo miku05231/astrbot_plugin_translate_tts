@@ -4,7 +4,7 @@
         "hint": "选择语音合成服务提供商",
         "type": "string",
         "default": "gpt_sovits",
-        "options": ["gpt_sovits", "edge_tts", "openai_tts", "fish_audio", "azure_tts"]
+        "options": ["gpt_sovits", "edge_tts", "openai_tts", "fish_audio", "azure_tts", "qwen_tts"]
     },
     "gsv_api_url": {
         "description": "GPT-SoVITS API 地址",
@@ -97,6 +97,19 @@
         "hint": "Azure TTS 使用的语音名称，如 ja-JP-NanamiNeural、en-US-JennyNeural",
         "type": "string",
         "default": "ja-JP-NanamiNeural"
+    },
+    "qwen_api_key": {
+        "description": "Qwen API Key",
+        "hint": "阿里云 DashScope API Key",
+        "type": "string",
+        "default": ""
+    },
+    "qwen_voice_name": {
+        "description": "Qwen 语音名称",
+        "hint": "Qwen3-TTS 使用的语音名称",
+        "type": "string",
+        "default": "Chelsie",
+        "options": ["Chelsie", "Ethan", "Serena", "Amber", "Bella", "Nicole", "Jason", "Grace", "Skye"]
     },
     "target_lang": {
         "description": "目标语言代码",

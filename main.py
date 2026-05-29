@@ -47,6 +47,10 @@ class Main(Star):
         self.azure_region: str = config.get("azure_region", "eastasia")
         self.azure_voice_name: str = config.get("azure_voice_name", "ja-JP-NanamiNeural")
 
+        # Qwen3-TTS 配置
+        self.qwen_api_key: str = config.get("qwen_api_key", "")
+        self.qwen_voice_name: str = config.get("qwen_voice_name", "Chelsie")
+
         # 目标语言配置
         self.target_lang: str = config.get("target_lang", "ja")
         self.target_lang_name: str = config.get("target_lang_name", "日语")
@@ -138,6 +142,7 @@ class Main(Star):
             "openai_tts": self._tts_openai,
             "fish_audio": self._tts_fish_audio,
             "azure_tts": self._tts_azure,
+            "qwen_tts": self._tts_qwen,
         }
 
         provider_func = providers.get(self.tts_provider)
@@ -255,6 +260,38 @@ class Main(Star):
             )
             resp.raise_for_status()
             return resp.content
+
+    async def _tts_qwen(self, text: str) -> bytes | None:
+        """Qwen3-TTS (阿里通义千问语音合成)"""
+        if not self.qwen_api_key:
+            logger.error("[翻译TTS] Qwen API Key 未配置")
+            return None
+
+        headers = {
+            "Authorization": f"Bearer {self.qwen_api_key}",
+            "Content-Type": "application/json",
+        }
+        body = {
+            "model": "qwen3-tts",
+            "input": {
+                "text": text,
+                "voice": self.qwen_voice_name,
+            },
+        }
+        async with httpx.AsyncClient(timeout=self.request_timeout) as client:
+            resp = await client.post(
+                "https://dashscope.aliyuncs.com/api/v1/services/aigc/text2speech/text-speech-generation",
+                headers=headers,
+                json=body,
+            )
+            resp.raise_for_status()
+            result = resp.json()
+            audio_url = result.get("output", {}).get("audio", "")
+            if audio_url:
+                audio_resp = await client.get(audio_url)
+                audio_resp.raise_for_status()
+                return audio_resp.content
+            return None
 
     def _save_audio(self, audio_bytes: bytes) -> str:
         save_dir = self.save_dir or os.path.join(os.path.dirname(os.path.abspath(__file__)), "temp")
