@@ -31,7 +31,7 @@
 
 ```bash
 cd /path/to/AstrBot/plugins
-git clone https://github.com/JxjxK/astrbot_plugin_translate_tts.git
+git clone https://github.com/miku05231/astrbot_plugin_translate_tts.git
 ```
 
 ### 安装 Edge TTS（可选）
