@@ -4,7 +4,7 @@
         "hint": "选择语音合成服务提供商",
         "type": "string",
         "default": "gpt_sovits",
-        "options": ["gpt_sovits", "edge_tts", "openai_tts", "fish_audio", "azure_tts", "qwen_tts"]
+        "options": ["gpt_sovits", "edge_tts", "openai_tts", "fish_audio", "azure_tts", "qwen_tts", "qwen_local"]
     },
     "gsv_api_url": {
         "description": "GPT-SoVITS API 地址",

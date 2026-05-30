@@ -143,6 +143,7 @@ class Main(Star):
             "fish_audio": self._tts_fish_audio,
             "azure_tts": self._tts_azure,
             "qwen_tts": self._tts_qwen,
+            "qwen_local": self._tts_qwen_local,
         }
 
         provider_func = providers.get(self.tts_provider)
@@ -292,6 +293,22 @@ class Main(Star):
                 audio_resp.raise_for_status()
                 return audio_resp.content
             return None
+
+    async def _tts_qwen_local(self, text: str) -> bytes | None:
+        """Qwen3-TTS 本地部署"""
+        gsv_api_url = self.config.get("gsv_api_url", "http://host.docker.internal:9880")
+        body = {
+            "text": text,
+            "text_lang": self.target_lang,
+            "ref_audio_path": self.ref_audio_path,
+            "prompt_text": self.prompt_text,
+            "prompt_lang": self.prompt_lang,
+            "media_type": "wav",
+        }
+        async with httpx.AsyncClient(timeout=self.request_timeout) as client:
+            resp = await client.post(f"{gsv_api_url}/tts", json=body)
+            resp.raise_for_status()
+            return resp.content
 
     def _save_audio(self, audio_bytes: bytes) -> str:
         save_dir = self.save_dir or os.path.join(os.path.dirname(os.path.abspath(__file__)), "temp")
