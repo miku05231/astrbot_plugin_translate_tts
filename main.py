@@ -113,9 +113,22 @@ class Main(Star):
             system_prompt = self.custom_translation_prompt
         else:
             system_prompt = (
-                f"请将以下文本翻译成{self.target_lang_name}。"
-                f"只输出{self.target_lang_name}翻译结果，不要输出任何其他内容，不要解释，不要保留原文。"
-                "翻译要自然流畅，适合语音对话场景。"
+                f"You are a professional translator. Your ONLY task: translate the user's text into {self.target_lang_name}.\n"
+                f"Rules:\n"
+                f"1. Output ONLY the {self.target_lang_name} translation\n"
+                f"2. NO explanations, notes, or commentary\n"
+                f"3. NO original text included\n"
+                f"4. NO prefixes like 'Translation:' or similar\n"
+                f"5. The translation must be natural and fluent\n"
+                f"6. Detect the source language automatically — it may be Chinese, English, Japanese, or any other language\n"
+                f"7. Never repeat or echo the input text\n\n"
+                f"Examples (Chinese → {self.target_lang_name}):\n"
+                f"Input: 你好吗 → Output: こんにちは\n"
+                f"Input: 今天天气真好 → Output: 今日はいい天気ですね\n\n"
+                f"Examples (English → {self.target_lang_name}):\n"
+                f"Input: How are you? → Output: お元気ですか？\n"
+                f"Input: The weather is nice today → Output: 今日はいい天気ですね\n\n"
+                f"Now translate the following into {self.target_lang_name}:\n"
             )
         try:
             provider_id = await self.context.get_current_chat_provider_id(
