@@ -50,17 +50,15 @@
     },
     "openai_tts_model": {
         "description": "OpenAI TTS 模型",
-        "hint": "OpenAI TTS 使用的模型，可选 tts-1 或 tts-1-hd",
+        "hint": "OpenAI TTS 使用的模型名称，如 tts-1、tts-1-hd、irodori-tts 等",
         "type": "string",
-        "default": "tts-1",
-        "options": ["tts-1", "tts-1-hd"]
+        "default": "tts-1"
     },
     "openai_tts_voice": {
         "description": "OpenAI TTS 语音",
-        "hint": "OpenAI TTS 使用的语音，可选 alloy/echo/fable/onyx/nova/shimmer",
+        "hint": "OpenAI TTS 使用的语音，可选 alloy/echo/fable/onyx/nova/shimmer，或留空使用默认",
         "type": "string",
-        "default": "alloy",
-        "options": ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+        "default": "alloy"
     },
     "fish_api_url": {
         "description": "Fish Audio API 地址",
