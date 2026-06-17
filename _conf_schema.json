@@ -150,5 +150,17 @@
         "hint": "留空则使用默认翻译提示词，填写后将使用自定义提示词进行翻译",
         "type": "string",
         "default": ""
+    },
+    "command_prefix": {
+        "description": "指令前缀",
+        "hint": "用于识别指令的前缀符号，如 /、！等，指令响应将跳过翻译",
+        "type": "string",
+        "default": "/"
+    },
+    "skip_commands": {
+        "description": "跳过指令响应",
+        "hint": "开启后，指令（如 /help）的响应将不会被翻译和语音合成",
+        "type": "bool",
+        "default": true
     }
 }

@@ -64,8 +64,18 @@ class Main(Star):
         # 自定义翻译提示词（可选）
         self.custom_translation_prompt: str = config.get("custom_translation_prompt", "")
 
+        # 指令前缀配置（用于跳过指令响应）
+        self.command_prefix: str = config.get("command_prefix", "/")
+        self.skip_commands: bool = config.get("skip_commands", True)
+
     @filter.on_decorating_result()
     async def translate_tts_decorate(self, event: AstrMessageEvent) -> None:
+        # 跳过指令响应
+        if self.skip_commands:
+            original_msg = event.message_str or ""
+            if original_msg.strip().startswith(self.command_prefix):
+                return
+
         result = event.get_result()
         if not result or not result.chain:
             return
